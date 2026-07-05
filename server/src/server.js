@@ -7,8 +7,14 @@ dotenv.config();
 
 const port = process.env.PORT || 5000;
 
-await connectDb();
-await seedAdmin();
+try {
+  await connectDb();
+  await seedAdmin();
+} catch (error) {
+  console.error("Failed to start API server:");
+  console.error(error.message);
+  process.exit(1);
+}
 
 const server = app.listen(port, () => {
   console.log(`API running on http://localhost:${port}`);
