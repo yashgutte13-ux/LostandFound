@@ -13,8 +13,13 @@ import { errorHandler, notFound } from "./middleware/error.middleware.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const configuredClientUrls = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 const allowedOrigins = new Set([
-  process.env.CLIENT_URL || "http://localhost:3000",
+  ...configuredClientUrls,
+  "https://lostandfoundforcampus.netlify.app",
   "http://localhost:3000",
   "http://localhost:5173"
 ]);

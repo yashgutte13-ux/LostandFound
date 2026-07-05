@@ -27,6 +27,20 @@ npm run dev
 
 The client runs on `http://localhost:3000` and the API runs on `http://localhost:5000`.
 
+## Deployment
+
+Set `VITE_API_URL` in the frontend host to your deployed API base URL, including `/api`, for example:
+
+```env
+VITE_API_URL=https://your-backend.onrender.com/api
+```
+
+Set `CLIENT_URL` in the API host to the deployed frontend URL, for example:
+
+```env
+CLIENT_URL=https://lostandfoundforcampus.netlify.app
+```
+
 ## Default Admin
 
 Set these in `server/.env` before starting the server:
