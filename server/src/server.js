@@ -8,22 +8,25 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 
 try {
+  console.log("🚀 Starting application...");
+  console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+  console.log("PORT:", process.env.PORT);
+
   await connectDb();
+  console.log("✅ Database connected");
+
   await seedAdmin();
+  console.log("✅ Admin seeded");
 } catch (error) {
-  console.error("Failed to start API server:");
-  console.error(error.message);
+  console.error("❌ Startup failed:");
+  console.error(error); // <-- print full error, not just message
   process.exit(1);
 }
 
 const server = app.listen(port, () => {
-  console.log(`API running on http://localhost:${port}`);
+  console.log(`API running on port ${port}`);
 });
 
 server.on("error", (error) => {
-  if (error.code === "EADDRINUSE") {
-    console.error(`Port ${port} is already in use. Stop the old server or set a different PORT in server/.env.`);
-    process.exit(1);
-  }
-  throw error;
+  console.error(error);
 });
